@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Konfigurasi path yang bisa dishare via FileProvider -->
+<paths>
+    <!-- Folder cache temporer (untuk export CSV) -->
+    <cache-path name="cache" path="." />
+    <!-- Folder external files -->
+    <external-files-path name="external_files" path="." />
+    <!-- Folder files internal app -->
+    <files-path name="files" path="." />
+</paths>
