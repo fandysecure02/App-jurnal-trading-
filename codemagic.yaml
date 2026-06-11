@@ -3,9 +3,11 @@ workflows:
     name: Android Build
     max_build_duration: 60
     environment:
-      flutter: stable
+      flutter: 3.24.0
       java: 17
     scripts:
+      - name: Flutter version check
+        script: flutter --version
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build APK
