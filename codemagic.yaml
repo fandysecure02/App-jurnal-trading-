@@ -1,61 +1,30 @@
 workflows:
   android-workflow:
-    name: Android Build
-    max_build_duration: 60
+    name: Build APK
+    instance_type: mac_mini_m1
     environment:
+      groups:
+        - name: default
+      vars:
+        PACKAGE_NAME: "com.example.sniperlog"
       flutter: stable
       java: 17
     scripts:
-      - name: Flutter version check
-        script: flutter --version
-      - name: Get Flutter packages
-        script: flutter pub get
-      - name: Fix gradle after flutter upgrade
+      - name: Set up local.properties
         script: |
-          cat > android/app/build.gradle << 'GRADLE'
-          plugins {
-              id "com.android.application"
-              id "kotlin-android"
-              id "dev.flutter.flutter-gradle-plugin"
-          }
-          android {
-              namespace "com.example.sniperlog"
-              compileSdk 36
-              compileOptions {
-                  sourceCompatibility JavaVersion.VERSION_17
-                  targetCompatibility JavaVersion.VERSION_17
-              }
-              kotlinOptions {
-                  jvmTarget = "17"
-              }
-              defaultConfig {
-                  applicationId "com.example.sniperlog"
-                  minSdk 21
-                  targetSdk 36
-                  versionCode flutter.versionCode
-                  versionName flutter.versionName
-                  multiDexEnabled true
-              }
-              buildTypes {
-                  release {
-                      signingConfig signingConfigs.debug
-                      minifyEnabled false
-                      shrinkResources false
-                  }
-              }
-          }
-          flutter {
-              source "../.."
-          }
-          GRADLE
+          echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
       - name: Build APK
-        script: flutter build apk --release --split-per-abi
+        script: |
+          flutter build apk --release --split-per-abi
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
     publishing:
       email:
         recipients:
-          - your@email.com
+          - fandysecure02@gmail.com
         notify:
           success: true
           failure: true
