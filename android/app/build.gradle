@@ -14,11 +14,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '17'
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -40,5 +36,5 @@ android {
 }
 
 flutter {
-    source '../..'
+    source "../.."
 }
