@@ -4,7 +4,7 @@ workflows:
     instance_type: mac_mini_m1
     environment:
       groups:
-        - name: default
+        - default
       vars:
         PACKAGE_NAME: "com.example.sniperlog"
       flutter: stable
